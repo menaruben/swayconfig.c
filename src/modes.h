@@ -15,7 +15,6 @@ static void print_mode(const Mode_t *mode)
 
     for (size_t i = 0; mode->keybinds[i] != NULL; i++)
     {
-        printf("  ");
         print_keybind(mode->keybinds[i]);
     }
 

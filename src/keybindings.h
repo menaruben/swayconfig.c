@@ -19,14 +19,9 @@ typedef struct
 
 void print_keybind(const Keybind_t *kb)
 {
+    printf("# %s\n", kb->description);
     printf("bindsym ");
-    for (size_t i = 0; kb->keys[i] != NULL; i++)
-    {
-        printf("%s", key_to_string(kb->keys[i]));
-        if (kb->keys[i + 1] != NULL)
-            printf("+");
-    }
-
+    print_keys(kb->keys);
     printf(" ");
 
     for (size_t j = 0; kb->command[j] != NULL; j++)

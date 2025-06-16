@@ -145,7 +145,6 @@ static const Keybind_t *defaultModeKeybinds[] = {
     &kb_kill_window,
     &kb_start_launcher,
     &kb_mode_resize,
-    &kb_mode_default,
     &kb_focus_left,
     &kb_focus_right,
     &kb_focus_up,

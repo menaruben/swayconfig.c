@@ -52,7 +52,7 @@ typedef struct
     KeyType_t type;
 } Key_t;
 
-const char *modifier_key_to_string(ModifierKey_t mk)
+static const char *modifier_key_to_string(ModifierKey_t mk)
 {
     switch (mk)
     {
@@ -73,7 +73,7 @@ const char *modifier_key_to_string(ModifierKey_t mk)
     }
 }
 
-const char *special_key_to_string(SpecialKey_t sk)
+static const char *special_key_to_string(SpecialKey_t sk)
 {
     switch (sk)
     {
@@ -108,7 +108,7 @@ const char *special_key_to_string(SpecialKey_t sk)
     }
 }
 
-const char *key_to_string(const Key_t *key)
+static const char *key_to_string(const Key_t *key)
 {
     switch (key->type)
     {
@@ -124,6 +124,16 @@ const char *key_to_string(const Key_t *key)
     }
     default:
         return "<invalid-key>";
+    }
+}
+
+void print_keys(Key_t **keys)
+{
+    for (size_t i = 0; keys[i] != NULL; i++)
+    {
+        printf("%s", key_to_string(keys[i]));
+        if (keys[i + 1] != NULL)
+            printf("+");
     }
 }
 
