@@ -1,5 +1,6 @@
 #include "keybindings.h"
 #include "helpers.h"
+#include "keys.h"
 #include "modes.h"
 #include "variables.h"
 #include <stddef.h>
@@ -41,6 +42,7 @@ static const size_t variable_count = sizeof(variables) / sizeof(Variable_t);
 
 // Keybind command arrays
 static const char *cmd_start_terminal[] = {"exec", TermVarName, NULL};
+static const char *cmd_kitty_reload[] = {"exec", "bash", "-c", "'", "kill", "-SIGUSR1", "$(pgrep kitty)", "'", NULL};
 static const char *cmd_sway_reload[] = {"reload", NULL};
 static const char *cmd_sway_exit[] = {"exit", NULL};
 static const char *cmd_open_firefox[] = {"exec", "firefox", NULL};
@@ -52,11 +54,11 @@ static const char *cmd_mode_resize[] = {"mode", ResizeModeName, NULL};
 
 // Keybinds as variables, so that we can potentionally reuse them later in other
 // modes...
-static const Keybind_t kb_startTerminal =
+static const Keybind_t kb_start_terminal =
     KEYBIND("Start terminal", KEYS(MODIFIER_KEY(Mod), MODIFIER_KEY(Return)),
             cmd_start_terminal);
 
-static const Keybind_t kb_startFirefox =
+static const Keybind_t kb_start_firefox =
     KEYBIND("Open firefox browser",
             KEYS(MODIFIER_KEY(Mod), MODIFIER_KEY(Shift), LITERAL_KEY('b')),
             cmd_open_firefox);
@@ -65,6 +67,11 @@ static const Keybind_t kb_flameshot_gui =
     KEYBIND("Takes a screenshot of selected area",
             KEYS(MODIFIER_KEY(Mod), MODIFIER_KEY(Shift), LITERAL_KEY('s')),
             cmd_flameshot_gui);
+
+static const Keybind_t kb_reload_kitty =
+    KEYBIND("Reload kitty config",
+            KEYS(MODIFIER_KEY(Mod), MODIFIER_KEY(Shift), LITERAL_KEY('r')),
+            cmd_kitty_reload);
 
 static const Keybind_t kb_reload_sway =
     KEYBIND("Reload sway config",
@@ -137,9 +144,10 @@ static const Keybind_t kb_resize_grow_right =
 
 // modes
 static const Keybind_t *defaultModeKeybinds[] = {
-    &kb_startTerminal,
-    &kb_startFirefox,
+    &kb_start_terminal,
+    &kb_start_firefox,
     &kb_flameshot_gui,
+    &kb_reload_kitty,
     &kb_reload_sway,
     &kb_exit_sway,
     &kb_kill_window,
