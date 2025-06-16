@@ -214,5 +214,9 @@ int main(void)
 
     // set wallpaper
     printf("exec_always swaybg -i ~/Downloads/asa.jpg -m fill\n");
+
+    // removing title bars and borders
+    printf("default_border none\n");
+    printf("default_floating_border none\n");
     return 0;
 }
