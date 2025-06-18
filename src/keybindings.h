@@ -7,44 +7,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define KEYBIND(desc, cmd, ...)                 \
-    (Keybind_t)                                 \
-    {                                           \
-        .description = desc,                    \
-        .command = cmd,                         \
-        .keys = (Key_t *[]){__VA_ARGS__, NULL}, \
-    }
+#define KEYBIND(desc, cmd, ...)                                                \
+  (Keybind_t) {                                                                \
+    .description = desc, .command = cmd,                                       \
+    .keys = (Key_t *[]){__VA_ARGS__, NULL},                                    \
+  }
 
-typedef struct
-{
-    const char *description;
-    Key_t **keys;         // NULL-terminated
-    const char **command; // NULL-terminated
+typedef struct {
+  const char *description;
+  Key_t **keys;         // NULL-terminated
+  const char **command; // NULL-terminated
 } Keybind_t;
 
-void print_keybind(const Keybind_t *kb)
-{
-    printf("# %s\n", kb->description);
-    printf("bindsym ");
-    print_keys(kb->keys);
-    printf(" ");
+void print_keybind(const Keybind_t *kb) {
+  printf("# %s\n", kb->description);
+  printf("bindsym ");
+  print_keys(kb->keys);
+  printf(" ");
 
-    for (size_t j = 0; kb->command[j] != NULL; j++)
-    {
-        printf("%s", kb->command[j]);
-        if (kb->command[j + 1] != NULL)
-            printf(" ");
-    }
+  for (size_t j = 0; kb->command[j] != NULL; j++) {
+    printf("%s", kb->command[j]);
+    if (kb->command[j + 1] != NULL)
+      printf(" ");
+  }
 
-    printf("\n");
+  printf("\n");
 }
 
-void print_keybinds(const Keybind_t keybinds[], size_t keybind_count)
-{
-    for (size_t i = 0; i < keybind_count; i++)
-    {
-        print_keybind(&keybinds[i]);
-    }
+void print_keybinds(const Keybind_t keybinds[], size_t keybind_count) {
+  for (size_t i = 0; i < keybind_count; i++) {
+    print_keybind(&keybinds[i]);
+  }
 }
 
 #endif // __KEYBINDINGS_H__
