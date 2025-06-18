@@ -7,8 +7,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define KEYBIND(desc, keylist, cmd) \
-    (Keybind_t) { .description = desc, .keys = keylist, .command = cmd }
+#define KEYBIND(desc, cmd, ...)                 \
+    (Keybind_t)                                 \
+    {                                           \
+        .description = desc,                    \
+        .command = cmd,                         \
+        .keys = (Key_t *[]){__VA_ARGS__, NULL}, \
+    }
 
 typedef struct
 {

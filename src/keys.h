@@ -137,13 +137,47 @@ void print_keys(Key_t **keys)
     }
 }
 
-#define LITERAL_KEY(c) \
+#define LITERAL(c) \
     &(Key_t) { .value = {.literal = (c)}, .type = Literal }
-#define MODIFIER_KEY(m) \
-    &(Key_t) { .value = {.modifier = (m)}, .type = Modifier }
-#define SPECIAL_KEY(s) \
-    &(Key_t) { .value = {.special = (s)}, .type = Special }
-#define KEYS(...) \
-    (Key_t *[]) { __VA_ARGS__, NULL }
+
+static Key_t _Mod = {.value.modifier = Mod, .type = Modifier};
+static Key_t _Return = {.value.modifier = Return, .type = Modifier};
+static Key_t _Ctrl = {.value.modifier = Ctrl, .type = Modifier};
+static Key_t _Alt = {.value.modifier = Alt, .type = Modifier};
+static Key_t _Shift = {.value.modifier = Shift, .type = Modifier};
+static Key_t _CapsLock = {.value.modifier = CapsLock, .type = Modifier};
+#define Mod (&_Mod)
+#define Return (&_Return)
+#define Ctrl (&_Ctrl)
+#define Alt (&_Alt)
+#define Shift (&_Shift)
+#define CapsLock (&_CapsLock)
+
+static Key_t _Escape = {.value.special = Escape, .type = Special};
+static Key_t _Tab = {.value.special = Tab, .type = Special};
+static Key_t _Space = {.value.special = Space, .type = Special};
+static Key_t _Insert = {.value.special = Insert, .type = Special};
+static Key_t _Delete = {.value.special = Delete, .type = Special};
+static Key_t _Home = {.value.special = Home, .type = Special};
+static Key_t _End = {.value.special = End, .type = Special};
+static Key_t _PageUp = {.value.special = PageUp, .type = Special};
+static Key_t _PageDown = {.value.special = PageDown, .type = Special};
+static Key_t _ArrowLeft = {.value.special = ArrowLeft, .type = Special};
+static Key_t _ArrowRight = {.value.special = ArrowRight, .type = Special};
+static Key_t _ArrowUp = {.value.special = ArrowUp, .type = Special};
+static Key_t _ArrowDown = {.value.special = ArrowDown, .type = Special};
+#define Escape (&_Escape)
+#define Tab (&_Tab)
+#define Space (&_Space)
+#define Insert (&_Insert)
+#define Delete (&_Delete)
+#define Home (&_Home)
+#define End (&_End)
+#define PageUp (&_PageUp)
+#define PageDown (&_PageDown)
+#define ArrowLeft (&_ArrowLeft)
+#define ArrowRight (&_ArrowRight)
+#define ArrowUp (&_ArrowUp)
+#define ArrowDown (&_ArrowDown)
 
 #endif

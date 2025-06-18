@@ -1,6 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
+CC="gcc"
+# CCFLAGS="-Wall -Wextra"
+CCFLAGS=""
 SRC="swayconfig.c"
 BIN="./swayconfig"
 CONFIG_DIR="${HOME}/.config/sway"
@@ -9,7 +12,7 @@ CONFIG="${CONFIG_DIR}/config"
 BACKUP="${BACKUP_DIR}/config.$(date +%s).backup"
 
 echo "Compiling $SRC..."
-if ! gcc -Wall -Wextra -o "$BIN" "$SRC"; then
+if ! $CC $CCFLAGS -o "$BIN" "$SRC"; then
   echo "Compilation failed with exit code $?."
   exit 1
 fi
